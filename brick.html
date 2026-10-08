@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nasif Ibne Mohiuddin— The Brick Maker</title>
+<meta name="description" content="A single fired brick, hand-selected and made by Nasif. Exhibit No. 001.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#3B2A1E;
+    --bg-deep:#2A1D14;
+    --bg-deeper:#1C130D;
+    --paper:#F3E9D2;
+    --paper-dim:#DCCBA4;
+    --ink:#241708;
+    --text:#F3E9D2;
+    --text-dim:#C6AE84;
+    --brick:#C1522F;
+    --brick-light:#E28356;
+    --brass:#E0A82E;
+    --brass-soft:#F2C660;
+    --line: rgba(243,233,210,0.16);
+    --line-paper: rgba(35,23,8,0.14);
+    --shadow: 0 40px 70px -25px rgba(0,0,0,0.55);
+    --ease: cubic-bezier(.22,.9,.32,1);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Newsreader',serif;
+    font-size:1.02rem;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:700;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  ::selection{background:var(--brass);color:var(--ink);}
+  :focus-visible{outline:2px solid var(--brass-soft); outline-offset:3px;}
+
+  .mono{
+    font-family:'Space Mono',monospace;
+    letter-spacing:0.04em;
+  }
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:0.7rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--brass-soft);
+  }
+  .section-title{
+    font-size:clamp(1.9rem,4vw,3rem);
+    text-align:center;
+    margin-bottom:0.6rem;
+  }
+  .section-sub{
+    text-align:center;
+    color:var(--text-dim);
+    max-width:520px;
+    margin:0 auto 3.2rem;
+    font-size:1.08rem;
+    font-style:italic;
+    line-height:1.5;
+  }
+  section.on-paper .section-sub{color:#4B5C56;}
+
+  /* ---------- Buttons ---------- */
+  .btn-primary{
+    background:var(--brass);
+    color:var(--ink);
+    border:none;
+    padding:1rem 2.1rem;
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    letter-spacing:0.01em;
+    border-radius:2px;
+    cursor:pointer;
+    transition:transform 0.25s var(--ease), background 0.25s var(--ease);
+    box-shadow:0 14px 30px -12px rgba(224,168,46,0.55);
+  }
+  .btn-primary:hover{background:var(--brass-soft); transform:translateY(-2px);}
+  .btn-primary:active{transform:translateY(0);}
+  .btn-primary:disabled{opacity:0.6; cursor:default; transform:none;}
+
+  .link-inline{
+    background:none; border:none; cursor:pointer;
+    font-family:'Space Mono',monospace;
+    font-size:0.76rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--brass-soft);
+    padding:0.4rem 0;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.25s var(--ease);
+  }
+  .link-inline:hover{border-color:var(--brass-soft);}
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1.2rem clamp(1.2rem,4vw,3rem);
+    background:rgba(28,19,13,0);
+    border-bottom:1px solid transparent;
+    transition:background 0.4s var(--ease), border-color 0.4s var(--ease);
+  }
+  .nav.scrolled{
+    background:rgba(28,19,13,0.86);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-logo{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    letter-spacing:0.06em;
+    display:flex;
+    flex-direction:column;
+    line-height:1.1;
+  }
+  .nav-logo small{
+    font-family:'Space Mono',monospace;
+    font-weight:400;
+    font-size:0.6rem;
+    letter-spacing:0.18em;
+    color:var(--text-dim);
+    text-transform:uppercase;
+  }
+  .nav-cta{
+    background:transparent;
+    border:1px solid var(--brass);
+    color:var(--brass-soft);
+    padding:0.55rem 1.15rem;
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border-radius:2px;
+    cursor:pointer;
+    transition:background 0.25s var(--ease), color 0.25s var(--ease);
+  }
+  .nav-cta:hover{background:var(--brass); color:var(--ink);}
+
+  /* ---------- Hero: pedestal / spotlight ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:8rem 1.4rem 5rem;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    z-index:-2;
+    background:
+      radial-gradient(46% 40% at 50% 38%, rgba(226,131,86,0.16), transparent 68%),
+      var(--bg);
+  }
+  .hero-bg::after{
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.35;
+    mask-image:radial-gradient(60% 50% at 50% 40%, black, transparent 75%);
+  }
+  .motes{position:absolute; inset:0; z-index:-1; pointer-events:none;}
+  .mote{
+    position:absolute;
+    border-radius:50%;
+    background:var(--brass-soft);
+    opacity:0.35;
+    filter:blur(0.5px);
+    animation:drift 12s ease-in-out infinite;
+  }
+  @keyframes drift{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-30px);}
+  }
+
+  .eyebrow-top{margin-bottom:1.3rem;}
+  .hero h1{
+    font-size:clamp(2.3rem,6vw,4.2rem);
+    line-height:1.02;
+    text-transform:uppercase;
+    max-width:760px;
+  }
+  .hero h1 em{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:500;
+    text-transform:none;
+    color:var(--brick-light);
+    display:block;
+  }
+  .hero-sub{
+    max-width:440px;
+    margin:1.4rem auto 0;
+    color:var(--text-dim);
+    font-size:1.08rem;
+    line-height:1.6;
+  }
+
+  .pedestal{
+    position:relative;
+    margin:3rem 0 1.2rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .spotlight{
+    position:absolute;
+    top:-60px;
+    width:340px;
+    height:340px;
+    background:radial-gradient(circle, rgba(226,131,86,0.22), transparent 70%);
+    z-index:-1;
+  }
+  .plinth-line{
+    width:120px;
+    height:2px;
+    background:linear-gradient(90deg, transparent, var(--brass), transparent);
+    margin-top:0.4rem;
+  }
+  .placard{
+    margin-top:0.9rem;
+    font-family:'Space Mono',monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    text-align:center;
+    line-height:1.7;
+  }
+  .placard b{color:var(--brass-soft); font-weight:400;}
+
+  .hero-cta{
+    margin-top:1.8rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .hero-note{
+    font-family:'Space Mono',monospace;
+    font-size:0.74rem;
+    color:var(--text-dim);
+  }
+
+  .drag-hint{
+    margin-top:1.1rem;
+    font-family:'Space Mono',monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+  }
+
+  .brick-bubble{
+    min-height:1.3em;
+    margin-top:0.5rem;
+    font-family:'Space Mono',monospace;
+    font-size:0.74rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--brass-soft);
+    opacity:0;
+    transition:opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    transform:translateY(4px);
+  }
+  .brick-bubble.show{opacity:1; transform:translateY(0);}
+
+  .scroll-cue{
+    position:absolute;
+    bottom:2rem; left:50%;
+    transform:translateX(-50%);
+    font-family:'Space Mono',monospace;
+    font-size:0.68rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+  }
+  .chevron{
+    width:1px; height:26px;
+    background:linear-gradient(var(--brass), transparent);
+    animation:scrollpulse 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollpulse{
+    0%{opacity:0.2; transform:scaleY(0.4); transform-origin:top;}
+    50%{opacity:1; transform:scaleY(1); transform-origin:top;}
+    100%{opacity:0.2; transform:scaleY(0.4); transform-origin:top;}
+  }
+
+  /* ---------- 3D brick (shared) ---------- */
+  .brick-wrap{
+    --bw:200px; --bh:92px; --bd:114px;
+    perspective:1400px;
+    width:calc(var(--bw) + 150px);
+    height:calc(var(--bh) + 150px);
+    display:flex; align-items:center; justify-content:center;
+    cursor:grab;
+    touch-action:none;
+  }
+  .brick-wrap.large{--bw:280px; --bh:128px; --bd:160px;}
+  .brick-wrap:active{cursor:grabbing;}
+  .brick-wrap.pop{ animation: brickpop 0.45s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes brickpop{
+    0%{transform:scale(1);}
+    30%{transform:scale(0.9,1.12);}
+    55%{transform:scale(1.08,0.9);}
+    100%{transform:scale(1);}
+  }
+  .brick{
+    position:relative;
+    width:var(--bw); height:var(--bh);
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
+  .face{
+    position:absolute; top:0; left:0;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0 3px, transparent 3px 28px),
+      linear-gradient(155deg, var(--brick-light), var(--brick) 55%, #8A3620);
+    border:1px solid rgba(0,0,0,0.28);
+    box-shadow:inset 0 0 22px rgba(0,0,0,0.28);
+  }
+  .face-front{ width:var(--bw); height:var(--bh); transform:translateZ(calc(var(--bd)/2)); }
+  .face-back{ width:var(--bw); height:var(--bh); transform:rotateY(180deg) translateZ(calc(var(--bd)/2)); }
+  .face-right{ width:var(--bd); height:var(--bh); left:calc((var(--bw) - var(--bd))/2); transform:rotateY(90deg) translateZ(calc(var(--bw)/2)); }
+  .face-left{ width:var(--bd); height:var(--bh); left:calc((var(--bw) - var(--bd))/2); transform:rotateY(-90deg) translateZ(calc(var(--bw)/2)); }
+  .face-top{
+    width:var(--bw); height:var(--bd); top:calc((var(--bh) - var(--bd))/2); transform:rotateX(90deg) translateZ(calc(var(--bh)/2));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .face-bottom{ width:var(--bw); height:var(--bd); top:calc((var(--bh) - var(--bd))/2); transform:rotateX(-90deg) translateZ(calc(var(--bh)/2)); }
+
+  .stamp{
+    font-family:'Space Mono',monospace;
+    font-size:0.6rem;
+    letter-spacing:0.14em;
+    color:rgba(20,15,10,0.6);
+    text-transform:uppercase;
+    border:1px solid rgba(20,15,10,0.4);
+    padding:0.3em 0.55em;
+    white-space:nowrap;
+  }
+
+  /* ---------- Marquee ---------- */
+  .marquee{
+    background:var(--paper);
+    color:var(--ink);
+    overflow:hidden;
+    padding:0.9rem 0;
+    border-top:2px solid var(--brass);
+    border-bottom:2px solid var(--brass);
+  }
+  .marquee-track{
+    display:flex; width:max-content; gap:2.2rem;
+    animation:marquee 28s linear infinite;
+    font-family:'Space Mono',monospace;
+    font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase;
+  }
+  .marquee-track span.hl{color:var(--brick);}
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ---------- Reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(34px); transition:opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Section bands ---------- */
+  section{ padding:6.5rem clamp(1.2rem,5vw,5rem); }
+  .band-deep{ background:var(--bg-deep); }
+  .band-deeper{ background:var(--bg-deeper); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+
+  /* ---------- Process timeline ("From Clay to Kiln") ---------- */
+  .process-scroller{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:2.6rem;
+    max-width:900px;
+    margin:0 auto;
+    align-items:start;
+  }
+  .morph-col{
+    position:sticky;
+    top:110px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:0.4rem;
+  }
+  .morph-stage-wrap{
+    width:170px; height:150px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .morph-shape{
+    width:92px; height:92px;
+    border-radius:40px;
+    background:#7a746a;
+    transition:background 0.15s linear;
+  }
+  .morph-eyebrow{ margin-top:0.6rem; }
+  .morph-label{
+    margin-top:0.35rem;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--brass-soft);
+    text-align:center;
+    min-height:2.2em;
+  }
+  .morph-plinth{
+    width:70px; height:2px;
+    background:linear-gradient(90deg, transparent, var(--brass), transparent);
+    margin-top:0.9rem;
+  }
+  .process-timeline{
+    position:relative;
+  }
+  .timeline-line{
+    position:absolute;
+    left:26px; top:6px; bottom:6px;
+    width:2px;
+    background:var(--line);
+  }
+  .timeline-fill{
+    position:absolute;
+    top:0; left:0; width:100%;
+    height:0%;
+    background:var(--brass);
+  }
+  .process-step{
+    position:relative;
+    padding-left:74px;
+    margin-bottom:3rem;
+  }
+  .process-step:last-child{margin-bottom:0;}
+  .step-icon{
+    position:absolute; left:0; top:-4px;
+    width:54px; height:54px;
+    border-radius:50%;
+    background:var(--bg-deeper);
+    border:2px solid var(--brass);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--brass-soft);
+    z-index:1;
+  }
+  .step-icon svg{ width:24px; height:24px; }
+  .step-copy .craft-num{ display:block; margin-bottom:0.3rem; }
+  .process-step h3{ font-size:1.3rem; margin-bottom:0.5rem; }
+  .process-step p{ color:var(--text-dim); font-size:0.95rem; line-height:1.6; max-width:460px; }
+  .craft-num{ font-family:'Space Mono',monospace; color:var(--brick-light); font-size:0.78rem; letter-spacing:0.1em; }
+
+  /* ---------- Viewer / Provenance ---------- */
+  .viewer-grid{
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:1.05fr 0.95fr;
+    align-items:center; gap:3rem;
+  }
+  .viewer-stage{ display:flex; flex-direction:column; align-items:center; }
+  .spec-sheet{
+    background:var(--paper);
+    color:var(--ink);
+    padding:2.2rem 2rem;
+    border-radius:3px;
+    box-shadow:var(--shadow);
+  }
+  .spec-sheet .eyebrow{ color:#7A5A2C; margin-bottom:1rem; display:block; }
+  .spec-sheet dl{ margin:0; }
+  .spec-sheet dl > div{
+    display:flex; justify-content:space-between; gap:1rem;
+    padding:0.9rem 0; border-bottom:1px solid var(--line-paper);
+  }
+  .spec-sheet dl > div:first-of-type{ padding-top:0; }
+  .spec-sheet dl > div:last-of-type{ border-bottom:none; }
+  .spec-sheet dt{ color:#5C6B65; font-size:0.88rem; }
+  .spec-sheet dd{ margin:0; text-align:right; font-family:'Space Mono',monospace; font-size:0.82rem; max-width:58%; }
+
+  /* ---------- Trial (Compression mini-game) ---------- */
+  .trial{ text-align:center; }
+  .trial-stage{ max-width:420px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:1.6rem; }
+  .trial-brick-wrap{ width:170px; height:170px; display:flex; align-items:center; justify-content:center; }
+  .trial-brick{
+    width:145px; height:76px;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0 3px, transparent 3px 24px),
+      linear-gradient(155deg, var(--brick-light), var(--brick) 55%, #8A3620);
+    border-radius:3px;
+    box-shadow:0 24px 44px -16px rgba(193,82,47,0.55);
+    transition:transform 0.06s ease-out;
+  }
+  .trial-brick.shake{ animation:brickshake 0.18s ease-in-out; }
+  @keyframes brickshake{
+    0%{transform:translate(0,0) rotate(0);}
+    25%{transform:translate(-4px,2px) rotate(-1.5deg);}
+    50%{transform:translate(3px,-2px) rotate(1.5deg);}
+    75%{transform:translate(-2px,1px) rotate(-1deg);}
+    100%{transform:translate(0,0) rotate(0);}
+  }
+  .trial-meter{
+    width:100%; height:14px;
+    background:rgba(241,233,216,0.08);
+    border:1px solid var(--line);
+    border-radius:8px; position:relative; overflow:hidden;
+  }
+  .meter-fill{ height:100%; width:0%; background:linear-gradient(90deg, var(--brick), var(--brass-soft)); transition:width 0.12s linear; }
+  .meter-label{
+    position:absolute; top:-1.7rem; right:0;
+    font-family:'Space Mono',monospace; font-size:0.85rem; color:var(--brass-soft);
+  }
+  #trialBtn{ min-width:220px; }
+  .trial-result, .kiln-result{
+    margin-top:0.6rem; padding:1.4rem 1.6rem;
+    border:1px solid var(--brass); border-radius:3px;
+    background:rgba(224,168,46,0.08);
+    width:100%;
+  }
+  .trial-result h3, .kiln-result h3{ font-size:1.25rem; color:var(--brass-soft); margin-bottom:0.4rem; }
+  .trial-result p, .kiln-result p{ color:var(--text-dim); font-size:0.92rem; line-height:1.5; font-family:'Newsreader',serif; font-style:italic; }
+
+  /* ---------- Kiln Watch (pop-up mini-game) ---------- */
+  .kiln{ text-align:center; }
+  .kiln-stage{ max-width:460px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:1.6rem; }
+  .kiln-hud{
+    display:flex; align-items:center; justify-content:center; gap:2.2rem;
+    font-family:'Space Mono',monospace; font-size:0.85rem; color:var(--text-dim);
+  }
+  .kiln-hud span{ color:var(--brass-soft); }
+  .kiln-combo{
+    font-family:'Space Mono',monospace; font-size:0.8rem; color:var(--brick-light);
+    opacity:0; transition:opacity 0.2s var(--ease);
+  }
+  .kiln-grid{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:16px; width:100%;
+  }
+  .kiln-slot{
+    position:relative;
+    aspect-ratio:1;
+    background:none; border:none; padding:0;
+    cursor:pointer;
+  }
+  .kiln-mask{
+    position:absolute; inset:0;
+    border-radius:50%;
+    overflow:hidden;
+    box-shadow:inset 0 6px 16px rgba(0,0,0,0.55), 0 0 0 3px rgba(241,233,216,0.08);
+    background:radial-gradient(circle at 50% 40%, #1c130d, #0d0805 72%);
+  }
+  .kiln-brick{
+    position:absolute; left:50%; bottom:0;
+    width:56%; height:46%;
+    transform:translate(-50%, 55%);
+    background: linear-gradient(155deg, var(--brick-light), var(--brick) 55%, #8A3620);
+    border-radius:2px;
+    opacity:0;
+    transition: transform 0.32s cubic-bezier(.34,1.56,.64,1), opacity 0.2s ease;
+  }
+  .kiln-slot.up .kiln-brick{ transform:translate(-50%, 6%); opacity:1; }
+  .kiln-slot.caught .kiln-brick{ animation:kilnCaught 0.3s ease forwards; }
+  @keyframes kilnCaught{
+    0%{ opacity:1; transform:translate(-50%,6%) scale(1); }
+    100%{ opacity:0; transform:translate(-50%,-40%) scale(0.6); }
+  }
+  .kiln-points{
+    position:absolute; left:50%; top:20%;
+    transform:translate(-50%,0);
+    font-family:'Space Mono',monospace; font-size:0.72rem; font-weight:700;
+    color:var(--brass-soft); pointer-events:none;
+    animation:pointsFloat 0.6s ease-out forwards;
+  }
+  @keyframes pointsFloat{
+    0%{opacity:1; transform:translate(-50%,0);}
+    100%{opacity:0; transform:translate(-50%,-26px);}
+  }
+  #kilnBtn{ min-width:220px; }
+
+  /* ---------- Testimonials / Visitor Book ---------- */
+  .testimonials{ background:var(--paper); color:var(--ink); }
+  .testimonials .section-sub{ color:#4B5C56; }
+  .test-track{
+    display:flex; gap:1.4rem; overflow-x:auto; scroll-snap-type:x mandatory;
+    padding:0.5rem 0 1rem; scrollbar-width:none;
+    max-width:1100px; margin:0 auto;
+  }
+  .test-track::-webkit-scrollbar{ display:none; }
+  .test-card{
+    scroll-snap-align:start; flex:0 0 min(320px,80vw);
+    background:#fff; border:1px solid var(--line-paper); border-radius:3px; padding:1.7rem;
+  }
+  .test-card p.quote{ font-family:'Newsreader',serif; font-size:1.1rem; font-style:italic; line-height:1.45; margin-bottom:1.1rem; }
+  .test-card p.attr{ font-family:'Space Mono',monospace; font-size:0.72rem; color:#8A6428; letter-spacing:0.03em; }
+  .test-arrows{ display:flex; gap:0.6rem; justify-content:center; margin-top:1.4rem; }
+  .test-arrows button{
+    width:38px; height:38px; border-radius:50%; border:1px solid var(--line-paper);
+    background:transparent; color:var(--ink); cursor:pointer; font-size:1rem;
+    transition:border-color 0.25s var(--ease), color 0.25s var(--ease);
+  }
+  .test-arrows button:hover{ border-color:var(--brass); color:#8A6428; }
+
+  /* ---------- Pricing / Acquire ---------- */
+  .pricing{ text-align:center; }
+  .pricing-card{
+    max-width:420px; margin:0 auto;
+    background:linear-gradient(165deg, var(--bg-deep), var(--bg-deeper));
+    border:1px solid var(--brass);
+    border-radius:5px; padding:3rem 2.2rem;
+    box-shadow:var(--shadow);
+  }
+  .stock-note{
+    font-family:'Space Mono',monospace; font-size:0.78rem; color:var(--brick-light);
+    margin-bottom:1.4rem; letter-spacing:0.03em;
+  }
+  .price{ font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:700; margin-bottom:1.6rem; }
+  .strike{ font-size:1.05rem; color:var(--text-dim); text-decoration:line-through; margin-right:0.6rem; font-weight:500; }
+  #addCartBtn{ width:100%; }
+  .pricing .hero-note{ margin-top:1.2rem; display:block; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:2.4rem clamp(1.2rem,5vw,5rem);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+    font-size:0.78rem; color:var(--text-dim); border-top:1px solid var(--line);
+    background:var(--bg-deeper);
+  }
+
+  /* ---------- Toast ---------- */
+  .toast{
+    position:fixed; bottom:1.6rem; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--brass); color:var(--ink); padding:0.85rem 1.4rem; border-radius:3px;
+    font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:0.86rem;
+    opacity:0; pointer-events:none; transition:opacity 0.3s var(--ease), transform 0.3s var(--ease); z-index:200;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* ---------- Confetti ---------- */
+  .confetti-piece{
+    position:fixed; top:-10px; width:8px; height:14px; z-index:300; pointer-events:none;
+    animation:confettifall 1.6s ease-in forwards;
+  }
+  @keyframes confettifall{ to{ transform:translateY(105vh) rotate(540deg); opacity:0.2; } }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:920px){
+    .viewer-grid{ grid-template-columns:1fr; }
+    .spec-sheet{ max-width:440px; margin:0 auto; }
+  }
+  @media (max-width:700px){
+    .process-scroller{ grid-template-columns:1fr; gap:0; }
+    .morph-col{
+      position:sticky; top:64px; z-index:2;
+      flex-direction:row; justify-content:center; gap:1rem;
+      background:rgba(18,51,48,0.92); backdrop-filter:blur(10px);
+      padding:0.8rem 1rem; border-radius:6px; margin-bottom:2rem;
+      border:1px solid var(--line);
+    }
+    .morph-stage-wrap{ width:64px; height:64px; }
+    .morph-shape{ width:44px; height:44px; }
+    .morph-eyebrow, .morph-plinth{ display:none; }
+    .morph-label{ text-align:left; min-height:auto; }
+  }
+  @media (max-width:520px){
+    .brick-wrap{ --bw:140px; --bh:64px; --bd:82px; }
+    .brick-wrap.large{ --bw:180px; --bh:82px; --bd:104px; }
+    section{ padding:4.5rem 1.2rem; }
+    .process-step{ padding-left:62px; }
+    .step-icon{ width:46px; height:46px; }
+    .step-icon svg{ width:20px; height:20px; }
+    .timeline-line{ left:22px; }
+    .kiln-grid{ gap:10px; }
+    .kiln-hud{ gap:1.2rem; font-size:0.76rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .marquee-track{ animation:none; }
+    .mote{ animation:none; }
+    .chevron{ animation:none; }
+    .reveal{ transition:none; opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-logo">NASIF IBNE MOHIUDDIN<small>The Brick Maker</small></div>
+  <button class="nav-cta" data-scroll="#pricing">Acquire</button>
+</nav>
+
+<main>
+
+  <!-- HERO: pedestal / spotlight -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="motes">
+      <div class="mote" style="width:5px;height:5px;top:20%;left:30%;animation-delay:0s;"></div>
+      <div class="mote" style="width:4px;height:4px;top:60%;left:65%;animation-delay:3s;"></div>
+      <div class="mote" style="width:3px;height:3px;top:38%;left:70%;animation-delay:1.5s;"></div>
+      <div class="mote" style="width:4px;height:4px;top:70%;left:35%;animation-delay:4.5s;"></div>
+    </div>
+
+    <p class="eyebrow eyebrow-top">MADE BY NASIF IBNE MOHIUDDIN · BRICK MAKER</p>
+    <h1>A Single Brick<em>on display, indefinitely</em></h1>
+    <p class="hero-sub">Exhibit No. 001. One hand-selected, kiln-fired brick, presented without irony as an object worthy of your full attention.</p>
+
+    <div class="pedestal">
+      <div class="spotlight"></div>
+      <div class="brick-wrap" id="heroWrap">
+        <div class="brick" id="heroCube">
+          <div class="face face-front"></div>
+          <div class="face face-back"></div>
+          <div class="face face-right"></div>
+          <div class="face face-left"></div>
+          <div class="face face-top"><span class="stamp">No. 001</span></div>
+          <div class="face face-bottom"></div>
+        </div>
+      </div>
+      <div class="plinth-line"></div>
+      <p class="placard"><b>Exhibit No. 001</b> — Fired Clay, Made by Nasif<br>Hand-selected from the workshop floor</p>
+      <p class="drag-hint">Drag to admire · tap for a reaction</p>
+      <p class="brick-bubble mono" id="heroBubble"></p>
+    </div>
+
+    <div class="hero-cta">
+      <button class="btn-primary" data-scroll="#pricing">Acquire The Piece — $499</button>
+      <span class="hero-note">RAW MATERIAL COST: $0.31 · YOU'RE ACQUIRING THE CONTEXT</span>
+      <button class="link-inline" data-scroll="#process">See the full procedure ↓</button>
+    </div>
+
+    <div class="scroll-cue">Scroll<div class="chevron"></div></div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- PROCESS: From Clay to Kiln -->
+  <section class="process band-deep" id="process">
+    <h2 class="section-title reveal">From Clay to Kiln</h2>
+    <p class="section-sub reveal">The full procedure, start to finish. Six steps, no shortcuts, one brick.</p>
+
+    <div class="process-scroller">
+      <div class="morph-col">
+        <div class="morph-stage-wrap">
+          <div class="morph-shape" id="morphShape"></div>
+        </div>
+        <span class="eyebrow morph-eyebrow">LIVE STAGE</span>
+        <p class="morph-label mono" id="morphLabel">RAW CLAY</p>
+        <div class="morph-plinth"></div>
+      </div>
+
+      <div class="process-timeline" id="processTimeline">
+      <div class="timeline-line"><div class="timeline-fill" id="timelineFill"></div></div>
+
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,4 21,9 12,14 3,9"></polygon><polyline points="3,14 12,19 21,14"></polyline></svg>
+        </div>
+        <div class="step-copy">
+          <span class="craft-num mono">STEP 01</span>
+          <h3>Clay Extraction</h3>
+          <p>Sourced from a single quarry bed, one layer down, chosen for consistency of mineral content rather than any romantic story we could tell about it.</p>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"></path></svg>
+        </div>
+        <div class="step-copy">
+          <span class="craft-num mono">STEP 02</span>
+          <h3>Mixing &amp; Tempering</h3>
+          <p>Water is worked into the clay until it holds together without cracking, and air pockets are pressed out by hand — the difference between a brick and a small explosion in the kiln.</p>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="9" rx="1"></rect><line x1="4" y1="8" x2="8" y2="4"></line><line x1="20" y1="8" x2="16" y2="4"></line><line x1="8" y1="4" x2="16" y2="4"></line></svg>
+        </div>
+        <div class="step-copy">
+          <span class="craft-num mono">STEP 03</span>
+          <h3>Pressed Into Form</h3>
+          <p>The tempered clay is pressed into a single mold and struck level. It's the only design decision on this entire project we genuinely agonized over.</p>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="22"></line><line x1="2" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="22" y2="12"></line><line x1="4.9" y1="4.9" x2="7" y2="7"></line><line x1="17" y1="17" x2="19.1" y2="19.1"></line><line x1="4.9" y1="19.1" x2="7" y2="17"></line><line x1="17" y1="7" x2="19.1" y2="4.9"></line></svg>
+        </div>
+        <div class="step-copy">
+          <span class="craft-num mono">STEP 04</span>
+          <h3>Air-Dried, Unbothered</h3>
+          <p>Left to rest for several days until most of the moisture has left the clay. Fire it too wet and it cracks. So it waits, same as anything worth doing properly.</p>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-.5-2-1-2.5 1.5 1 2.5 3 2.5 5a5.5 5.5 0 0 1-11 0C6.5 7 9 5 12 2z"></path></svg>
+        </div>
+        <div class="step-copy">
+          <span class="craft-num mono">STEP 05</span>
+          <h3>Kiln No. 7, 1,000°C</h3>
+          <p>Fired for roughly twelve hours. The iron in the clay oxidizes under heat and turns the surface from dull grey to the terracotta red you're looking at now. That part, at least, is genuine chemistry.</p>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8,12.5 11,15.5 16,9"></polyline></svg>
+        </div>
+        <div class="step-copy">
+          <span class="craft-num mono">STEP 06</span>
+          <h3>Cooled &amp; Inspected</h3>
+          <p>Left to cool slowly, then checked for cracks, chips, and general demeanor. Approved. Catalogued as Exhibit No. 001. Placed, finally, under glass.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVENANCE / 360 VIEWER -->
+  <section class="viewer" id="viewer">
+    <h2 class="section-title reveal">Provenance &amp; Specifications</h2>
+    <p class="section-sub reveal">Rotate freely. Examine every angle. It is, from all sides, a brick — and we stand by that.</p>
+    <div class="viewer-grid">
+      <div class="viewer-stage reveal">
+        <div class="brick-wrap large" id="viewerWrap">
+          <div class="brick" id="viewerCube">
+            <div class="face face-front"></div>
+            <div class="face face-back"></div>
+            <div class="face face-right"></div>
+            <div class="face face-left"></div>
+            <div class="face face-top"><span class="stamp">No. 001</span></div>
+            <div class="face face-bottom"></div>
+          </div>
+        </div>
+        <p class="drag-hint">Drag to rotate · tap for a reaction</p>
+        <p class="brick-bubble mono" id="viewerBubble"></p>
+      </div>
+      <div class="spec-sheet reveal">
+        <span class="eyebrow mono">CATALOGUE ENTRY</span>
+        <dl>
+          <div><dt>Material</dt><dd>Single-origin fired clay</dd></div>
+          <div><dt>Weight</dt><dd>2.3 kg</dd></div>
+          <div><dt>Compression rating</dt><dd>3,500 PSI</dd></div>
+          <div><dt>Origin</dt><dd>Kiln No. 7, Nasif's Workshop</dd></div>
+          <div><dt>Finish</dt><dd>Matte terracotta</dd></div>
+          <div><dt>Edition</dt><dd>Unnumbered, unrepeatable</dd></div>
+          <div><dt>Warranty</dt><dd>Lifetime — yours, not the brick's</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPRESSION TRIAL -->
+  <section class="trial band-deeper" id="trial">
+    <h2 class="section-title reveal">The Compression Trial</h2>
+    <p class="section-sub reveal">Six seconds. One brick. A brief, unofficial conservation assessment.</p>
+    <div class="trial-stage reveal">
+      <div class="trial-brick-wrap"><div class="trial-brick" id="trialBrick"></div></div>
+      <div class="trial-meter">
+        <span class="meter-label mono" id="meterLabel">0 PSI</span>
+        <div class="meter-fill" id="meterFill"></div>
+      </div>
+      <button class="btn-primary" id="trialBtn">Start Trial</button>
+      <div class="trial-result" id="trialResult" hidden>
+        <h3 id="resultTier">—</h3>
+        <p id="resultNote">—</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KILN WATCH: pop-up mini-game -->
+  <section class="kiln" id="kiln">
+    <h2 class="section-title reveal">Kiln Watch</h2>
+    <p class="section-sub reveal">The kiln overproduces from time to time. Catch the good ones before they're lost to the archive.</p>
+    <div class="kiln-stage reveal">
+      <div class="kiln-hud">
+        <div>SCORE <span class="mono" id="kilnScore">0</span></div>
+        <div>TIME <span class="mono" id="kilnTime">20</span>s</div>
+      </div>
+      <div class="kiln-combo mono" id="kilnCombo">×2 COMBO</div>
+      <div class="kiln-grid" id="kilnGrid">
+        <button class="kiln-slot" data-slot="0"><span class="kiln-mask"><span class="kiln-brick"></span></span></button>
+        <button class="kiln-slot" data-slot="1"><span class="kiln-mask"><span class="kiln-brick"></span></span></button>
+        <button class="kiln-slot" data-slot="2"><span class="kiln-mask"><span class="kiln-brick"></span></span></button>
+        <button class="kiln-slot" data-slot="3"><span class="kiln-mask"><span class="kiln-brick"></span></span></button>
+        <button class="kiln-slot" data-slot="4"><span class="kiln-mask"><span class="kiln-brick"></span></span></button>
+        <button class="kiln-slot" data-slot="5"><span class="kiln-mask"><span class="kiln-brick"></span></span></button>
+      </div>
+      <button class="btn-primary" id="kilnBtn">Begin Kiln Watch</button>
+      <div class="kiln-result" id="kilnResult" hidden>
+        <h3 id="kilnResultTitle">—</h3>
+        <p id="kilnResultNote">—</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISITOR BOOK -->
+  <section class="testimonials on-paper" id="testimonials">
+    <h2 class="section-title reveal">Visitor Book</h2>
+    <p class="section-sub reveal">Unsolicited. Mostly unverifiable. Entirely sincere.</p>
+    <div class="test-track" id="testTrack">
+      <div class="test-card reveal">
+        <p class="quote">"I built my career on connections. Now I'm building my patio on this."</p>
+        <p class="attr">— MARCUS T., STRUCTURAL ARCHITECT</p>
+      </div>
+      <div class="test-card reveal">
+        <p class="quote">"Finally, a status symbol my neighbors can't identify from the street."</p>
+        <p class="attr">— PRIYA R., LANDSCAPE DESIGNER</p>
+      </div>
+      <div class="test-card reveal">
+        <p class="quote">"It doesn't do anything. That's exactly why I need it."</p>
+        <p class="attr">— DEV K., SELF-DESCRIBED MINIMALIST</p>
+      </div>
+      <div class="test-card reveal">
+        <p class="quote">"My dog buried it in the yard. I dug it back up. Worth it."</p>
+        <p class="attr">— LENA F., VERIFIED OWNER</p>
+      </div>
+      <div class="test-card reveal">
+        <p class="quote">"The only thing more solid than this brick is my alibi."</p>
+        <p class="attr">— ANONYMOUS, BY REQUEST</p>
+      </div>
+    </div>
+    <div class="test-arrows">
+      <button id="testPrev" aria-label="Scroll visitor book left">←</button>
+      <button id="testNext" aria-label="Scroll visitor book right">→</button>
+    </div>
+  </section>
+
+  <!-- ACQUIRE -->
+  <section class="pricing band-deep" id="pricing">
+    <h2 class="section-title reveal">Acquire The Piece</h2>
+    <p class="section-sub reveal">One brick. One decision. No pallet required.</p>
+    <div class="pricing-card reveal">
+      <p class="stock-note">Only <span id="stockCount">7</span> left this firing season</p>
+      <p class="price"><span class="strike">$1,200</span>$499</p>
+      <button class="btn-primary" id="addCartBtn">Add To Cart</button>
+      <p class="hero-note">Free white-glove delivery. Insurance not included — nothing can really happen to a brick.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="mono">© NASIF IBNE MOHIUDDIN — ONE BRICK, INFINITE CONTEXT</span>
+  <span class="mono">HANDLE WITH THE RESPECT IT DESERVES</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Nav scroll state ---------- */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 40){ nav.classList.add('scrolled'); }
+    else{ nav.classList.remove('scrolled'); }
+  }, {passive:true});
+
+  /* ---------- Smooth scroll buttons ---------- */
+  document.querySelectorAll('[data-scroll]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = document.querySelector(btn.getAttribute('data-scroll'));
+      if(target){ target.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'start'}); }
+    });
+  });
+
+  /* ---------- Marquee content ---------- */
+  var marqueeItems = ['MADE BY NASIF IBNE MOHIUDDIN','HANDLE WITH CARE','DO NOT TOUCH (YOU MAY DRAG)','ACCESSION NO. 001','FIRED CLAY, UNDATED'];
+  var track = document.getElementById('marqueeTrack');
+  var mHtml = '';
+  for(var r=0;r<2;r++){
+    marqueeItems.forEach(function(item, idx){
+      var cls = idx === 2 ? ' class="hl"' : '';
+      mHtml += '<span'+cls+'>'+item+'</span><span>·</span>';
+    });
+  }
+  track.innerHTML = mHtml;
+
+  /* ---------- Reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ---------- Process timeline scroll-fill + clay-to-brick morph ---------- */
+  var timelineEl = document.getElementById('processTimeline');
+  var timelineFill = document.getElementById('timelineFill');
+  var morphShape = document.getElementById('morphShape');
+  var morphLabel = document.getElementById('morphLabel');
+
+  var morphStops   = [0, 0.2, 0.4, 0.6, 0.8, 1.0];
+  var morphWidths  = [88, 100, 138, 138, 140, 140];
+  var morphHeights = [88, 84, 74, 74, 72, 72];
+  var morphRadii   = [40, 30, 12, 9, 6, 4];
+  var morphColors  = ['#7a746a', '#6b655c', '#8c7f68', '#b7a582', '#e2703d', '#b8452a'];
+  var morphGlows   = [0, 0.04, 0.04, 0.04, 0.9, 0.18];
+  var morphLabels  = ['Raw Clay', 'Tempered & Mixed', 'Pressed Into Form', 'Air-Dried', 'Firing · 1,000°C', 'Fired & Inspected'];
+
+  function lerp(a, b, t){ return a + (b - a) * t; }
+  function hexToRgb(hex){
+    var v = parseInt(hex.slice(1), 16);
+    return { r:(v >> 16) & 255, g:(v >> 8) & 255, b:v & 255 };
+  }
+  function lerpColor(hex1, hex2, t){
+    var c1 = hexToRgb(hex1), c2 = hexToRgb(hex2);
+    var r = Math.round(lerp(c1.r, c2.r, t));
+    var g = Math.round(lerp(c1.g, c2.g, t));
+    var b = Math.round(lerp(c1.b, c2.b, t));
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+  function findSegment(progress){
+    for(var i = 0; i < morphStops.length - 1; i++){
+      if(progress <= morphStops[i + 1]){
+        var span = morphStops[i + 1] - morphStops[i];
+        var t = span > 0 ? (progress - morphStops[i]) / span : 0;
+        return { i:i, t:Math.max(0, Math.min(1, t)) };
+      }
+    }
+    return { i:morphStops.length - 2, t:1 };
+  }
+  function updateMorphVisual(progress){
+    var seg = findSegment(progress);
+    var i = seg.i, t = seg.t;
+    var w = lerp(morphWidths[i], morphWidths[i + 1], t);
+    var h = lerp(morphHeights[i], morphHeights[i + 1], t);
+    var r = lerp(morphRadii[i], morphRadii[i + 1], t);
+    var color = lerpColor(morphColors[i], morphColors[i + 1], t);
+    var glow = lerp(morphGlows[i], morphGlows[i + 1], t);
+
+    morphShape.style.width = w + 'px';
+    morphShape.style.height = h + 'px';
+    morphShape.style.borderRadius = r + 'px';
+    morphShape.style.background = color;
+    morphShape.style.boxShadow = '0 0 ' + (46 * glow) + 'px rgba(226,112,61,' + (0.85 * glow) + ')';
+
+    var labelIdx = Math.min(morphLabels.length - 1, Math.round(progress * (morphLabels.length - 1)));
+    morphLabel.textContent = morphLabels[labelIdx];
+  }
+
+  var tlTicking = false;
+  function updateTimelineFill(){
+    tlTicking = false;
+    var rect = timelineEl.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var start = vh * 0.8;
+    var end = -rect.height + vh * 0.35;
+    var progress = (start - rect.top) / (start - end);
+    progress = Math.max(0, Math.min(1, progress));
+    timelineFill.style.height = (progress * 100) + '%';
+    updateMorphVisual(progress);
+  }
+  function requestTimelineUpdate(){
+    if(!tlTicking){
+      tlTicking = true;
+      requestAnimationFrame(updateTimelineFill);
+    }
+  }
+  window.addEventListener('scroll', requestTimelineUpdate, {passive:true});
+  window.addEventListener('resize', requestTimelineUpdate);
+  updateTimelineFill();
+
+  /* ---------- Brick reaction bubble ---------- */
+  function showBubble(el, text){
+    if(!el) return;
+    el.textContent = text;
+    el.classList.add('show');
+    clearTimeout(el._hideTimer);
+    el._hideTimer = setTimeout(function(){ el.classList.remove('show'); }, 1600);
+  }
+  function popWrap(wrapEl){
+    wrapEl.classList.remove('pop');
+    void wrapEl.offsetWidth;
+    wrapEl.classList.add('pop');
+  }
+
+  var heroCaptions = ['Solid.','Fired to perfection.','Structurally unbothered.','That is the spot.','Kiln-approved.','Still just a brick.'];
+  var heroCapIdx = 0;
+  var viewerCaptions = ['Inspected.','Approved.','No comment.','Yes, still a brick.','Handle with care.'];
+  var viewerCapIdx = 0;
+
+  /* ---------- 3D draggable + tappable cube ---------- */
+  function makeCube(wrapId, cubeId, opts){
+    var wrap = document.getElementById(wrapId);
+    var cube = document.getElementById(cubeId);
+    if(!wrap || !cube) return;
+
+    var state = {
+      rx: opts.baseRx || -14,
+      ry: opts.baseRy || 24,
+      dragging: false,
+      startX: 0, startY: 0,
+      startRx: 0, startRy: 0,
+      maxDelta: 0,
+      autoSpeed: opts.autoRotate ? 0.12 : 0
+    };
+
+    function apply(){
+      cube.style.transform = 'rotateX(' + state.rx + 'deg) rotateY(' + state.ry + 'deg)';
+    }
+    apply();
+
+    function pointerDown(e){
+      state.dragging = true;
+      state.maxDelta = 0;
+      var p = e.touches ? e.touches[0] : e;
+      state.startX = p.clientX;
+      state.startY = p.clientY;
+      state.startRx = state.rx;
+      state.startRy = state.ry;
+    }
+    function pointerMove(e){
+      if(!state.dragging) return;
+      var p = e.touches ? e.touches[0] : e;
+      var dx = p.clientX - state.startX;
+      var dy = p.clientY - state.startY;
+      state.maxDelta = Math.max(state.maxDelta, Math.abs(dx), Math.abs(dy));
+      state.ry = state.startRy + dx * 0.4;
+      state.rx = Math.max(-70, Math.min(70, state.startRx - dy * 0.4));
+      apply();
+      if(e.touches) e.preventDefault();
+    }
+    function pointerUp(){
+      if(!state.dragging) return;
+      state.dragging = false;
+      if(state.maxDelta < 6 && opts.onTap){ opts.onTap(); }
+    }
+
+    wrap.addEventListener('mousedown', pointerDown);
+    window.addEventListener('mousemove', pointerMove);
+    window.addEventListener('mouseup', pointerUp);
+    wrap.addEventListener('touchstart', pointerDown, {passive:true});
+    wrap.addEventListener('touchmove', pointerMove, {passive:false});
+    wrap.addEventListener('touchend', pointerUp);
+
+    if(state.autoSpeed && !reduceMotion){
+      function loop(){
+        if(!state.dragging){
+          state.ry += state.autoSpeed;
+          apply();
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    }
+  }
+
+  makeCube('heroWrap', 'heroCube', {
+    autoRotate:true, baseRx:-14, baseRy:24,
+    onTap:function(){
+      popWrap(document.getElementById('heroWrap'));
+      showBubble(document.getElementById('heroBubble'), heroCaptions[heroCapIdx % heroCaptions.length]);
+      heroCapIdx++;
+    }
+  });
+  makeCube('viewerWrap', 'viewerCube', {
+    autoRotate:false, baseRx:-16, baseRy:-28,
+    onTap:function(){
+      popWrap(document.getElementById('viewerWrap'));
+      showBubble(document.getElementById('viewerBubble'), viewerCaptions[viewerCapIdx % viewerCaptions.length]);
+      viewerCapIdx++;
+    }
+  });
+
+  /* ---------- Compression Trial mini-game ---------- */
+  var trialBtn = document.getElementById('trialBtn');
+  var trialBrick = document.getElementById('trialBrick');
+  var meterFill = document.getElementById('meterFill');
+  var meterLabel = document.getElementById('meterLabel');
+  var trialResult = document.getElementById('trialResult');
+  var resultTier = document.getElementById('resultTier');
+  var resultNote = document.getElementById('resultNote');
+
+  var MAX_PSI = 600;
+  var trial = { active:false, psi:0, timeLeft:6, decayTimer:null, countTimer:null };
+
+  function updateMeter(){
+    var pct = Math.min(100, (trial.psi / MAX_PSI) * 100);
+    meterFill.style.width = pct + '%';
+    meterLabel.textContent = Math.round(trial.psi) + ' PSI';
+  }
+  function shakeBrick(){
+    trialBrick.classList.remove('shake');
+    void trialBrick.offsetWidth;
+    trialBrick.classList.add('shake');
+  }
+  function endTrial(){
+    trial.active = false;
+    clearInterval(trial.decayTimer);
+    clearInterval(trial.countTimer);
+    trialBtn.textContent = 'Try Again';
+
+    var tier, note;
+    if(trial.psi >= 450){
+      tier = 'CERTIFIED UNBREAKABLE';
+      note = 'Conservators have been quietly notified. ' + Math.round(trial.psi) + ' PSI applied and it did not so much as chip.';
+    } else if(trial.psi >= 250){
+      tier = 'THOROUGHLY REINFORCED';
+      note = Math.round(trial.psi) + ' PSI applied. It held, as advertised. We were never worried.';
+    } else {
+      tier = 'SURPRISINGLY RESILIENT';
+      note = 'Only ' + Math.round(trial.psi) + ' PSI applied — a gentle trial. The brick, frankly, barely noticed.';
+    }
+    resultTier.textContent = tier;
+    resultNote.textContent = note;
+    trialResult.hidden = false;
+    burstConfetti();
+  }
+  function startTrial(){
+    trial.active = true;
+    trial.psi = 0;
+    trial.timeLeft = 6;
+    trialResult.hidden = true;
+    updateMeter();
+    trialBtn.textContent = 'PRESS! (' + trial.timeLeft + 's)';
+
+    trial.decayTimer = setInterval(function(){
+      trial.psi = Math.max(0, trial.psi * 0.94);
+      updateMeter();
+    }, 200);
+
+    trial.countTimer = setInterval(function(){
+      trial.timeLeft -= 1;
+      if(trial.timeLeft <= 0){
+        endTrial();
+      } else {
+        trialBtn.textContent = 'PRESS! (' + trial.timeLeft + 's)';
+      }
+    }, 1000);
+  }
+  trialBtn.addEventListener('click', function(){
+    if(!trial.active){
+      startTrial();
+    } else {
+      trial.psi = Math.min(MAX_PSI + 50, trial.psi + 8 + Math.random() * 8);
+      updateMeter();
+      shakeBrick();
+    }
+  });
+
+  function burstConfetti(){
+    if(reduceMotion) return;
+    var colors = ['#E0A82E','#C1522F','#F2C660','#E28356'];
+    for(var i=0;i<26;i++){
+      var piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = (Math.random()*100) + 'vw';
+      piece.style.background = colors[i % colors.length];
+      piece.style.animationDelay = (Math.random()*0.3) + 's';
+      piece.style.animationDuration = (1.2 + Math.random()*0.8) + 's';
+      document.body.appendChild(piece);
+      (function(p){ setTimeout(function(){ p.remove(); }, 2200); })(piece);
+    }
+  }
+
+  /* ---------- Kiln Watch: pop-up mini-game ---------- */
+  var kilnSlots = Array.prototype.slice.call(document.querySelectorAll('.kiln-slot'));
+  var kilnBtn = document.getElementById('kilnBtn');
+  var kilnScoreEl = document.getElementById('kilnScore');
+  var kilnTimeEl = document.getElementById('kilnTime');
+  var kilnComboEl = document.getElementById('kilnCombo');
+  var kilnResult = document.getElementById('kilnResult');
+  var kilnResultTitle = document.getElementById('kilnResultTitle');
+  var kilnResultNote = document.getElementById('kilnResultNote');
+  kilnComboEl.style.opacity = 0;
+
+  var kilnTimeouts = new Array(kilnSlots.length).fill(null);
+  var kilnState = { active:false, score:0, combo:0, timeLeft:20, spawnTimer:null, tickTimer:null, upSlots:{} };
+  var kilnHighScore = 0;
+
+  function kilnUpdateScore(){ kilnScoreEl.textContent = kilnState.score; }
+  function kilnUpdateCombo(){
+    if(kilnState.combo > 1){
+      kilnComboEl.textContent = '×' + kilnState.combo + ' COMBO';
+      kilnComboEl.style.opacity = 1;
+    } else {
+      kilnComboEl.style.opacity = 0;
+    }
+  }
+  function kilnSpawnPoints(slotEl, amount){
+    var pts = document.createElement('span');
+    pts.className = 'kiln-points';
+    pts.textContent = '+' + amount;
+    slotEl.appendChild(pts);
+    setTimeout(function(){ pts.remove(); }, 650);
+  }
+  function kilnSpawnBrick(){
+    if(!kilnState.active) return;
+    var upCount = Object.keys(kilnState.upSlots).length;
+    if(upCount >= 2) return;
+    var available = [];
+    kilnSlots.forEach(function(s, i){ if(!kilnState.upSlots[i]) available.push(i); });
+    if(available.length === 0) return;
+    var idx = available[Math.floor(Math.random() * available.length)];
+    kilnState.upSlots[idx] = true;
+    var slotEl = kilnSlots[idx];
+    slotEl.classList.add('up');
+    var elapsed = 20 - kilnState.timeLeft;
+    var duration = Math.max(600, 1150 - elapsed * 20);
+    kilnTimeouts[idx] = setTimeout(function(){
+      if(kilnState.upSlots[idx]){
+        delete kilnState.upSlots[idx];
+        slotEl.classList.remove('up');
+        kilnState.combo = 0;
+        kilnUpdateCombo();
+      }
+    }, duration);
+  }
+  kilnSlots.forEach(function(slotEl, idx){
+    slotEl.addEventListener('click', function(){
+      if(!kilnState.active || !kilnState.upSlots[idx]) return;
+      clearTimeout(kilnTimeouts[idx]);
+      delete kilnState.upSlots[idx];
+      slotEl.classList.remove('up');
+      slotEl.classList.add('caught');
+      setTimeout(function(){ slotEl.classList.remove('caught'); }, 300);
+      kilnState.combo += 1;
+      var points = 10 + (kilnState.combo - 1) * 2;
+      kilnState.score += points;
+      kilnSpawnPoints(slotEl, points);
+      kilnUpdateScore();
+      kilnUpdateCombo();
+    });
+  });
+  function kilnEnd(){
+    kilnState.active = false;
+    clearInterval(kilnState.spawnTimer);
+    clearInterval(kilnState.tickTimer);
+    kilnSlots.forEach(function(s, i){
+      s.classList.remove('up');
+      clearTimeout(kilnTimeouts[i]);
+    });
+    kilnState.upSlots = {};
+    kilnBtn.disabled = false;
+    kilnBtn.textContent = 'Play Again';
+    if(kilnState.score > kilnHighScore){ kilnHighScore = kilnState.score; }
+
+    var title, note;
+    if(kilnState.score >= 220){
+      title = 'MASTER CURATOR';
+      note = 'Every brick accounted for. The registrar is quietly impressed.';
+    } else if(kilnState.score >= 100){
+      title = 'COMPETENT INSPECTOR';
+      note = 'A respectable watch. A few got away, but who is counting.';
+    } else {
+      title = 'TRAINEE ON DUTY';
+      note = 'The kiln remains, mostly, unsupervised. Give it another go.';
+    }
+    kilnResultTitle.textContent = title + ' — ' + kilnState.score + ' PTS';
+    kilnResultNote.textContent = 'Best this visit: ' + kilnHighScore + ' pts. ' + note;
+    kilnResult.hidden = false;
+    if(kilnState.score >= 100){ burstConfetti(); }
+  }
+  function kilnStart(){
+    kilnState.active = true;
+    kilnState.score = 0;
+    kilnState.combo = 0;
+    kilnState.timeLeft = 20;
+    kilnResult.hidden = true;
+    kilnUpdateScore();
+    kilnUpdateCombo();
+    kilnTimeEl.textContent = kilnState.timeLeft;
+    kilnBtn.disabled = true;
+    kilnBtn.textContent = 'Watching…';
+
+    kilnState.spawnTimer = setInterval(kilnSpawnBrick, 550);
+    kilnState.tickTimer = setInterval(function(){
+      kilnState.timeLeft -= 1;
+      kilnTimeEl.textContent = Math.max(0, kilnState.timeLeft);
+      if(kilnState.timeLeft <= 0){ kilnEnd(); }
+    }, 1000);
+  }
+  kilnBtn.addEventListener('click', function(){
+    if(!kilnState.active){ kilnStart(); }
+  });
+
+  /* ---------- Testimonial arrows ---------- */
+  var testTrack = document.getElementById('testTrack');
+  document.getElementById('testPrev').addEventListener('click', function(){
+    testTrack.scrollBy({left:-340, behavior: reduceMotion ? 'auto' : 'smooth'});
+  });
+  document.getElementById('testNext').addEventListener('click', function(){
+    testTrack.scrollBy({left:340, behavior: reduceMotion ? 'auto' : 'smooth'});
+  });
+
+  /* ---------- Stock counter ---------- */
+  var stockEl = document.getElementById('stockCount');
+  var stock = 7;
+  var stockTimer = setInterval(function(){
+    if(stock > 2 && Math.random() > 0.4){
+      stock -= 1;
+      stockEl.textContent = stock;
+    }
+    if(stock <= 2){ clearInterval(stockTimer); }
+  }, 8000);
+
+  /* ---------- Add to cart toast ---------- */
+  var toast = document.getElementById('toast');
+  var addCartBtn = document.getElementById('addCartBtn');
+  var toastTimeout;
+  addCartBtn.addEventListener('click', function(){
+    toast.textContent = 'Added to cart — your brick awaits.';
+    toast.classList.add('show');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
+  });
+
+})();
+</script>
+</body>
+</html>
